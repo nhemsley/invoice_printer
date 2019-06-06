@@ -392,7 +392,7 @@ module InvoicePrinter
       end
       @payment_box_height = min_height
 
-      if @document.bank_account_number.empty?
+      if @document.bank_account_number.empty? && @document.account_details.empty?
         @pdf.text_box(
           @labels[:payment],
           size: 10,
@@ -405,7 +405,21 @@ module InvoicePrinter
           at: [10, y(483) - @push_down],
           width: x(234)
         )
-        @pdf.stroke_rounded_rectangle([0, 508 - @push_down], 270, 45, 6)
+        @pdf.stroke_rounded_rectangle([0, y(508) - @push_down], x(266), 45, 6)
+      elsif !@document.account_details.empty?
+        lines = @document.account_details.split("\n").length
+        @pdf.text_box(
+          @document.account_details,
+          size: 13,
+          at: [10, y(498) - @push_down],
+          width: x(234)
+        )
+
+        push_down = [0, lines-3].max * 10
+        @payment_box_height += push_down
+        @push_items_table += push_down + 20
+
+        @pdf.stroke_rounded_rectangle([0, y(508) - @push_down], x(266), @payment_box_height, 6)
       else
         @payment_box_height = 60
         @push_iban = 0

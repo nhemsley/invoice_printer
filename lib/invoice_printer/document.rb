@@ -75,6 +75,7 @@ module InvoicePrinter
                 :tax3,
                 :total,
                 :bank_account_number,
+                :account_details,
                 :account_iban,
                 :account_swift,
                 # Collection of InvoicePrinter::Invoice::Items
@@ -111,6 +112,7 @@ module InvoicePrinter
           tax3:                         json['tax3'],
           total:                        json['total'],
           bank_account_number:          json['bank_account_number'],
+          account_details:              json['account_details'],
           account_iban:                 json['account_iban'],
           account_swift:                json['account_swift'],
           note:                         json['note'],
@@ -147,6 +149,7 @@ module InvoicePrinter
                    tax3:                         nil,
                    total:                        nil,
                    bank_account_number:          nil,
+                   account_details:              nil,
                    account_iban:                 nil,
                    account_swift:                nil,
                    items:                        nil,
@@ -179,6 +182,7 @@ module InvoicePrinter
       @tax3                         = String(tax3)
       @total                        = String(total)
       @bank_account_number          = String(bank_account_number)
+      @account_details              = String(account_details)
       @account_iban                 = String(account_iban)
       @account_swift                = String(account_swift)
       @items                        = items
@@ -217,6 +221,7 @@ module InvoicePrinter
         'tax3':                         @tax3,
         'total':                        @total,
         'bank_account_number':          @bank_account_number,
+        'account_details':              @account_details,
         'account_iban':                 @account_iban,
         'account_swift':                @account_swift,
         'items':                        @items.map(&:to_h),
