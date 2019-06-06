@@ -410,7 +410,7 @@ module InvoicePrinter
         lines = @document.account_details.split("\n").length
         @pdf.text_box(
           @document.account_details,
-          size: 13,
+          size: 11,
           at: [10, y(498) - @push_down],
           width: x(234)
         )
